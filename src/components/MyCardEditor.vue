@@ -90,12 +90,16 @@
     const query25 = ref([])
 
    
-    const ChangeCart = (_id, isActive) =>{
-        axios.put('https://crudcrud.com/api/'+store.getters.PURCHASESID+'/books/'+_id,{title: query21.value, imageUrl: "/book-1.png", genre: query22.value, author: query23.value, year: Number(query24.value), prise: Number(query25.value), isAdded: false})
-        setTimeout(() => {isActive.value = false
-        window.location.reload()}, 300);
-    }
-
+    const ChangeCart = async (_id, isActive) => {
+      try {
+        const response = await axios.put('https://crudcrud.com/api/'+store.getters.PURCHASESID+'/books/'+_id,{title: query21.value, imageUrl: "/book-1.png", genre: query22.value, author: query23.value, year: Number(query24.value), prise: Number(query25.value), isAdded: false})
+        isActive.value = false
+        console.log('Успешно изменено:', response.data);
+        window.location.reload()
+      } catch (error) {
+        console.error('Произошла ошибка при изменение экземпляра:', error);
+      }
+    };
 
     defineProps({
         _id: String,

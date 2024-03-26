@@ -59,26 +59,36 @@ const query3 = ref([])
 const query4 = ref([])
 const query5 = ref([])
 
+const delBooks = async (item) => {
+      try {
+        const response = await axios.delete('https://crudcrud.com/api/'+store.getters.PURCHASESID+'/books/'+item._id);
+        console.log('Успешно удалено:', response.data);
+        window.location.reload()
+      } catch (error) {
+        console.error('Произошла ошибка при удалении данных:', error);
+      }
+    };
 
-const delBooks = (item) =>{
-    axios.delete('https://crudcrud.com/api/'+store.getters.PURCHASESID+'/books/'+item._id)
-    setTimeout(() => {
-        window.location.reload()}, 300);
-  }
+const addTest = async () => {
+      try {
+        const response = await axios.post('https://crudcrud.com/api/'+store.getters.PURCHASESID+'/books',{title: "Книга", imageUrl: "/book-1.png", genre: "Драма", author: "Иван", year: 2024, prise: 250, isAdded: false})
+        console.log('Успешно добавлена:', response.data);
+        window.location.reload()
+      } catch (error) {
+        console.error('Произошла ошибка при добавление пробного экземпляра:', error);
+      }
+    };
 
-
-const addTest = () =>{
-    axios.post('https://crudcrud.com/api/'+store.getters.PURCHASESID+'/books',{title: "Книга", imageUrl: "/book-1.png", genre: "Драма", author: "Иван", year: 2024, prise: 250, isAdded: false})
-    setTimeout(() => {
-        window.location.reload()}, 300);
- }
-
-
- const AddBooks = (isActive) =>{
-    axios.post('https://crudcrud.com/api/'+store.getters.PURCHASESID+'/books',{title: query1.value, imageUrl: "/book-1.png", genre: query2.value, author: query3.value, year: Number(query4.value), prise: Number(query5.value), isAdded: false})
-    setTimeout(() => {isActive.value = false
-        window.location.reload()}, 300);
- }
+const AddBooks = async (isActive) => {
+      try {
+        const response = await axios.post('https://crudcrud.com/api/'+store.getters.PURCHASESID+'/books',{title: query1.value, imageUrl: "/book-1.png", genre: query2.value, author: query3.value, year: Number(query4.value), prise: Number(query5.value), isAdded: false})
+        isActive.value = false
+        console.log('Успешно добавлена:', response.data);
+        window.location.reload()
+      } catch (error) {
+        console.error('Произошла ошибка при добавление экземпляра:', error);
+      }
+    };
 
 
  defineProps({

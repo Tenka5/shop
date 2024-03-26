@@ -43,12 +43,12 @@
           </v-row>
         </v-container>
       </v-card>
-    <Editor :queryItems="queryItems"/>
+    <Editor :query-items="queryItems"/>
   </template>
   
   <script setup>
 
-    import { ref, computed, onMounted} from 'vue';
+    import { ref, computed, onMounted, watch} from 'vue';
 
 
     const items = ref([])
@@ -78,31 +78,30 @@
   }
   if(sortSelect.value==='Цене'){
     return p.sort((d1, d2)=>d1.prise-d2.prise)
-  } else {
-    return p.sort((d1, d2)=>d1.year-d2.year)
   }
+  return p.sort((d1, d2)=>d1.year-d2.year)
 })
 
 
 onMounted(async()=>{
-    setTimeout(() => {
-        try{
-        console.log(props.items1);
-        items.value=props.items1
-      var i=-1
-      for (var key in items.value) {
-        i++
-        itemsYears.value[i]=items.value[i]["year"].toString()
-        itemsAuthor.value[i]=items.value[i]["author"]
-        itemsGenre.value[i]=items.value[i]["genre"]
-      }
-      itemsYears.value=[...new Set(itemsYears.value)].sort()
-      itemsAuthor.value=[...new Set(itemsAuthor.value)].sort()
-      itemsGenre.value=[...new Set(itemsGenre.value)].sort()
-    }catch(err){
-      console.log(err)
-    }}, 300);
-  })
+  watch(() => props.items1, (newVal) => {
+        try {
+          items.value = newVal;
+          let i = -1;
+          items.value.forEach((element) => {
+            i++;
+            itemsYears.value[i] = element["year"].toString();
+            itemsAuthor.value[i] = element["author"];
+            itemsGenre.value[i] = element["genre"];
+          });
+          itemsYears.value = [...new Set(itemsYears.value)].sort();
+          itemsAuthor.value = [...new Set(itemsAuthor.value)].sort();
+          itemsGenre.value = [...new Set(itemsGenre.value)].sort();
+        } catch (err) {
+          console.log(err);
+        }
+      }, { immediate: true });
+    });
 
 
   const props = defineProps({

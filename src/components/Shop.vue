@@ -1,5 +1,5 @@
 <template>
-    <CardList :items="queryItems" @add-to-cart="addToCartPus"/>
+    <CardList :items="queryItems" @add-to-cart="addToCartCheck"/>
 </template>
 
 
@@ -11,27 +11,24 @@
   
 
   const store = useStore()
-  let CartItems = ref([])
+  let cartItems = ref([])
   const emit=defineEmits(['addToCart'])
-  let CartItems1 = ref([])
 
   
   const addToCart = (item) =>{
-    CartItems.value.push(item)
+    cartItems.value.push(item)
     item.isAdded=true
   }
 
 
   const removeFromCart = (item) =>{
-    CartItems.value.splice(CartItems.value.indexOf(item),1)
+    cartItems.value.splice(cartItems.value.indexOf(item),1)
     item.isAdded=false
   }
 
 
-  const addToCartPus = (item) =>{
-    CartItems1=store.getters.PURCHASES
-    CartItems=ref(CartItems1)
-    console.log(item)
+  const addToCartCheck = (item) =>{
+    cartItems=ref(store.getters.PURCHASES)
     if(!item.isAdded){
         addToCart(item)
     }else{
@@ -39,7 +36,7 @@
     }
     store.dispatch({
       type:'GET_PURCHASES',
-      CartItems: CartItems
+      CartItems: cartItems
     })
   }
   

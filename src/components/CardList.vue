@@ -5,13 +5,13 @@
           <MyCard
           :key="item._id"
           :title="item.title"
-          :imageUrl="item.imageUrl"
+          :image-url="item.imageUrl"
           :genre="item.genre"
           :author="item.author"
           :year="item.year"
           :prise="item.prise"
-          :isAdded="item.isAdded"
-          :onClickAdd="()=>emit('addToCart', item)"
+          :is-added="item.isAdded"
+          :on-click-add="()=>emit('addToCart', item)"
           />
       </v-col>
    </v-row>  

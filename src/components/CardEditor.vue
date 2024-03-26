@@ -11,8 +11,8 @@
                 :author="item.author"
                 :year="item.year"
                 :prise="item.prise"
-                :isAdded="item.isAdded"
-                :onClickAdd="()=>emit('addToCart', item)"
+                :is-added="item.isAdded"
+                :on-click-add="()=>emit('addToCart', item)"
                 />
             </v-col>
         </v-row>

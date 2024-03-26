@@ -1,28 +1,29 @@
-import { createStore } from 'vuex'
-
+import { createStore } from 'vuex';
+import { ref } from 'vue';
 
 export default createStore({
   state: {
-      purchases: [],
-      purchasesId: "cccee478c3374ed1bb41b9998b005dab"
-    },
+    purchases: [],
+    purchasesId: "5216b6147cde406eb63e2f32cdc60a06"
+  },
   mutations: {
     SET_PURCHASES: (state, payload) => {
-        state.purchases = payload;
+      state.purchases = payload;
     },
   },
-  actions:{
-    GET_PURCHASES: async (context, CartItems) => {
-        let data = CartItems.CartItems;
-        context.commit('SET_PURCHASES', data)
+  actions: {
+    GET_PURCHASES: async (context, cartItems) => {
+      console.log(cartItems);
+      let data = cartItems.CartItems;
+      context.commit('SET_PURCHASES', ref(data));
     },
   },
   getters: {
     PURCHASES: state => {
       return state.purchases;
     },
-    PURCHASESID: state =>{
-      return state.purchasesId
+    PURCHASESID: state => {
+      return state.purchasesId;
     }
-},
+  },
 });
