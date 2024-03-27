@@ -84,7 +84,7 @@
 
 
 onMounted(async()=>{
-  watch(() => props.items1, (newVal) => {
+  watch(() => props.itemsToFiltr, (newVal) => {
         try {
           items.value = newVal;
           let i = -1;
@@ -105,7 +105,7 @@ onMounted(async()=>{
 
 
   const props = defineProps({
-    items1: Array,
+    itemsToFiltr: Array,
   })
 
   </script>

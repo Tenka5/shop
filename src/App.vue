@@ -2,7 +2,7 @@
   <v-app>
     <Navbar/>
     <v-main>
-      <router-view :items1="items"></router-view>
+      <router-view :items-to-filtr="items"></router-view>
     </v-main>
   </v-app>
 </template>
