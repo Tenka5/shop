@@ -2,7 +2,7 @@
   <v-app>
     <Navbar/>
     <v-main>
-      <router-view :items-1="items"></router-view>
+      <router-view :items1="items"></router-view>
     </v-main>
   </v-app>
 </template>
@@ -20,7 +20,9 @@ const items = ref([])
 
 axios.get('https://crudcrud.com/api/'+store.getters.PURCHASESID+'/books')
   .then(response => {
+    console.log(response.data)
     items.value=response.data
+    console.log(items);
   })
   .catch(error => {
     console.log(error);

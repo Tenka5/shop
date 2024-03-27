@@ -42,7 +42,7 @@
         </template>
     </v-dialog>
 
-    <CardEditor :items="queryItems" @add-to-cart="delBooks"/>
+    <EditorList :items="queryItems" @add-to-cart="delBooks"/>
 </template>
 
 <script setup>

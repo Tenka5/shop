@@ -1,5 +1,5 @@
 <template>
-    <CardList :items="count" @add-to-cart="addToCartPus"/>
+    <CardList :items="count" @add-to-cart="addToCartCheck"/>
 </template>
 
 <script setup>
@@ -8,32 +8,30 @@
   import { useStore } from 'vuex'
 
 
-  let CartItems = ref([])
+  let cartItems = ref([])
   const emit=defineEmits(['addToCart'])
   const store = useStore()
-  let CartItems1 = ref([])
 
 
   const count = computed(() =>{
-    CartItems1=store.getters.PURCHASES
-    CartItems=ref(CartItems1)
-    return CartItems1
+    cartItems=ref(store.getters.PURCHASES)
+    return store.getters.PURCHASES
     })
 
 
   const addToCart = (item) =>{
-    CartItems.value.push(item)
+    cartItems.value.push(item)
     item.isAdded=true
   }
 
 
   const removeFromCart = (item) =>{
-    CartItems.value.splice(CartItems.value.indexOf(item),1)
+    cartItems.value.splice(cartItems.value.indexOf(item),1)
     item.isAdded=false
   }
 
 
-  const addToCartPus = (item) =>{
+  const addToCartCheck = (item) =>{
     if(!item.isAdded){
         addToCart(item)
     }else{
@@ -41,7 +39,7 @@
     }
     store.dispatch({
       type:'GET_PURCHASES',
-      CartItems: CartItems
+      CartItems: cartItems
     })
   }
 

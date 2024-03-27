@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row>
      <v-col v-for="item in items" :key="item._id" cols="2" class="mx-0">
-          <MyCard
+          <CardMain
           :key="item._id"
           :title="item.title"
           :image-url="item.imageUrl"
